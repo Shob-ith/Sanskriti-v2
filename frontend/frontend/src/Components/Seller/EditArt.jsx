@@ -21,7 +21,7 @@ function EditArt() {
   // Fetch seller's artworks
   useEffect(() => {
     if (!seller?.id) return;
-    fetch(`http://localhost:5000/arts/seller/${seller.id}`)
+    fetch(`https://sanskriti-nld4.onrender.com/arts/seller/${seller.id}`)
       .then(res => res.json())
       .then(data => setSellerArts(data))
       .catch(err => console.error("Failed to fetch seller artworks:", err));
@@ -34,7 +34,7 @@ function EditArt() {
       return;
     }
 
-    fetch(`http://localhost:5000/arts/${artId}`)
+    fetch(`https://sanskriti-nld4.onrender.com/arts/${artId}`)
       .then(res => res.json())
       .then(data => {
         setForm(data);
@@ -60,7 +60,7 @@ function EditArt() {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/update-art/${artId}`, {
+      const res = await fetch(`https://sanskriti-nld4.onrender.com/update-art/${artId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...updatedData, seller_id }),
@@ -77,7 +77,7 @@ function EditArt() {
     if (!window.confirm("Are you sure you want to delete this artwork?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/delete-art/${artId}`, {
+      const res = await fetch(`https://sanskriti-nld4.onrender.com/delete-art/${artId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ seller_id: seller.id })

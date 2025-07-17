@@ -7,7 +7,7 @@ function Paintings() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:5000/arts')
+    fetch('https://sanskriti-nld4.onrender.com/arts')
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch artworks');
         return res.json();

@@ -10,7 +10,7 @@ function CartSummary() {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:5000/cart/${user.id}`)
+    fetch(`https://sanskriti-nld4.onrender.com/cart/${user.id}`)
       .then(res => res.json())
       .then(data => setCartItems(data))
       .catch(err => console.error("Failed to fetch cart:", err))

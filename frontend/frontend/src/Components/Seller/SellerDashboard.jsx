@@ -39,7 +39,7 @@ function SellerDashboard() {
     data.append('image_file', formData.imageFile);
 
     try {
-      const res = await fetch('http://localhost:5000/add-art', {
+      const res = await fetch('https://sanskriti-nld4.onrender.com/add-art', {
         method: 'POST',
         body: data,
       });

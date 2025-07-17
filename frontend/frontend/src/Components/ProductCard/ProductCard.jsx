@@ -9,7 +9,7 @@ function ProductCard({ id, seller_id, title, image_url, description, price }) {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/cart/add', {
+      const res = await fetch('https://sanskriti-nld4.onrender.com/cart/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

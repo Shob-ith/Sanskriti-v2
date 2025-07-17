@@ -5,7 +5,7 @@ function SendOtp() {
   const [otpSent, setOtpSent] = useState(false);
 
   const handleSend = async () => {
-    const res = await fetch('http://localhost:5000/send-otp', {
+    const res = await fetch('https://sanskriti-nld4.onrender.com/send-otp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })
@@ -34,7 +34,7 @@ function VerifyOtp({ email }) {
   const [otp, setOtp] = useState('');
 
   const handleVerify = async () => {
-    const res = await fetch('http://localhost:5000/verify-otp', {
+    const res = await fetch('https://sanskriti-nld4.onrender.com/verify-otp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, otp })

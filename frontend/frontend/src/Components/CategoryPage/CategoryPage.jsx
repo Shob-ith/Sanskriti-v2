@@ -12,7 +12,7 @@ function CategoryPage() {
   useEffect(() => {
     const fetchCategoryProducts = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/arts?category=${categoryName}`);
+        const res = await fetch(`https://sanskriti-nld4.onrender.com/arts?category=${categoryName}`);
         const data = await res.json();
         if (res.ok) {
           setProducts(data.products || []);

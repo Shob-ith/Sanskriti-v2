@@ -33,7 +33,7 @@ function Register() {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/send-otp', {
+      const res = await fetch('https://sanskriti-nld4.onrender.com/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email }),
@@ -53,7 +53,7 @@ function Register() {
 
   const handleVerifyOtp = async () => {
     try {
-      const res = await fetch('http://localhost:5000/verify-otp', {
+      const res = await fetch('https://sanskriti-nld4.onrender.com/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email, otp }),
@@ -92,7 +92,7 @@ function Register() {
         data.append('seller_image', formData.sellerImage);
       }
 
-      const response = await fetch('http://localhost:5000/register', {
+      const response = await fetch('https://sanskriti-nld4.onrender.com/register', {
         method: 'POST',
         body: data,
       });

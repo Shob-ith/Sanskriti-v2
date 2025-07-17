@@ -34,7 +34,7 @@ function Cart() {
       return;
     }
 
-    fetch(`http://localhost:5000/cart/${parsedUser.id}`)
+    fetch(`https://sanskriti-nld4.onrender.com/cart/${parsedUser.id}`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -55,7 +55,7 @@ function Cart() {
 
   const handleRemove = async (cartId) => {
     try {
-      const res = await fetch(`http://localhost:5000/cart/remove/${cartId}`, {
+      const res = await fetch(`https://sanskriti-nld4.onrender.com/cart/remove/${cartId}`, {
         method: 'DELETE',
       });
 
