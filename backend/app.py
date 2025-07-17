@@ -377,6 +377,7 @@ def delete_art(art_id):
         print("Delete art error:", e)
         return jsonify({"error": "Failed to delete artwork"}), 500
 # --- ADD TO CART ---
+<<<<<<< HEAD
 @app.route('/cart/add', methods=['POST'])
 def add_to_cart():
 
@@ -384,11 +385,23 @@ def add_to_cart():
     print("Incoming JSON:", data)
 
     buyer_id = data.get("buyer_id") if data else None
+=======
+from flask import request, jsonify
+import requests
+
+@app.route('/cart/add', methods=['POST'])
+def add_to_cart():
+    data = request.get_json()
+    print("Incoming JSON:", data)
+
+    buyer_id = data.get("user_id") if data else None
+>>>>>>> 9e97610 (Fixed backend)
     art_id = data.get("art_id") if data else None
 
     print("buyer_id:", buyer_id, "art_id:", art_id)
 
     if not all([buyer_id, art_id]):
+<<<<<<< HEAD
         return jsonify({"error": "buyer_id and art_id required"}), 400
     data = request.get_json()
     buyer_id = data.get("buyer_id")
@@ -396,6 +409,9 @@ def add_to_cart():
 
     if not all([buyer_id, art_id]):
         return jsonify({"error": "buyer_id and art_id required"}), 400
+=======
+        return jsonify({"error": "user_id and art_id required"}), 400
+>>>>>>> 9e97610 (Fixed backend)
 
     headers = {
         "apikey": SUPABASE_API_KEY,
@@ -403,17 +419,32 @@ def add_to_cart():
         "Content-Type": "application/json"
     }
 
+<<<<<<< HEAD
     payload = {
         "buyer_id": buyer_id,
         "art_id": art_id
+=======
+    # Match column names in your Supabase table
+    payload = {
+        "buyer_id": buyer_id,  # FK to users table
+        "art_id": art_id      # FK to arts table
+>>>>>>> 9e97610 (Fixed backend)
     }
 
     res = requests.post(f"{SUPABASE_URL}/rest/v1/cart", headers=headers, json=payload)
     if res.status_code not in [200, 201]:
+<<<<<<< HEAD
+=======
+        print("Supabase error:", res.text)
+>>>>>>> 9e97610 (Fixed backend)
         return jsonify({"error": "Failed to add to cart"}), 500
 
     return jsonify({"message": "Item added to cart"}), 201
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9e97610 (Fixed backend)
 # --- GET CART ITEMS ---
 @app.route('/cart/<buyer_id>', methods=['GET'])
 def get_cart(buyer_id):
