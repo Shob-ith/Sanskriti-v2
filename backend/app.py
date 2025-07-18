@@ -10,6 +10,13 @@ from flask_mail import Mail, Message
 import random
 from dotenv import load_dotenv
 import os
+import razorpay
+
+load_dotenv()
+
+razorpay_client = razorpay.Client(
+    auth=(os.getenv("RAZORPAY_KEY_ID"), os.getenv("RAZORPAY_KEY_SECRET"))
+)
 
 
 
@@ -443,6 +450,60 @@ def remove_from_cart(cart_id):
         return jsonify({"error": "Failed to remove item from cart"}), 500
 
     return jsonify({"message": "Item removed from cart"}), 200
+
+
+@app.route('/create-order', methods=['POST'])
+def create_order():
+    try:
+        data = request.get_json()
+
+        if not data or "amount" not in data:
+            return jsonify({"error": "Amount is required"}), 400
+
+        try:
+            # Razorpay accepts amount in paise (1 INR = 100 paise)
+            amount_in_paise = int(float(data["amount"]) * 100)
+            if amount_in_paise <= 0:
+                return jsonify({"error": "Amount must be greater than 0"}), 400
+        except (ValueError, TypeError):
+            return jsonify({"error": "Invalid amount format"}), 400
+
+        # Create order in Razorpay
+        order = razorpay_client.order.create({
+            "amount": amount_in_paise,
+            "currency": "INR",
+            "payment_capture": 1
+        })
+
+        return jsonify({"order": order}), 200
+
+    except razorpay.errors.BadRequestError as re:
+        print("Razorpay BadRequestError:", str(re))
+        return jsonify({"error": "Invalid Razorpay request"}), 400
+
+    except Exception as e:
+        print("Error creating Razorpay order:", str(e))
+        return jsonify({"error": "Could not create Razorpay order"}), 500
+
+    
+@app.route("/save-transaction", methods=["POST"])
+def save_transaction():
+    data = request.get_json()
+
+    try:
+        response = supabase.table("transactions").insert({
+            "user_id": data.get("user_id"),
+            "order_id": data.get("order_id"),
+            "payment_id": data.get("payment_id"),
+            "signature": data.get("signature"),
+            "amount": data.get("amount")
+        }).execute()
+
+        return jsonify({"success": True, "message": "Transaction saved!"}), 200
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
 
 
 # --- MAIN ---

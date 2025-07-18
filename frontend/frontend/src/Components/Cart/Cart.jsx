@@ -76,32 +76,38 @@ function Cart() {
   };
 
   return (
-    <div className="p-6 min-h-screen bg-[#FAF4EF]">
-      <h2 className="text-3xl font-semibold text-center mb-6 text-[#6E1313]">🛒 Your Cart</h2>
+    <div className="p-6 min-h-screen bg-[#1E1B18] text-white">
+      <h2 className="text-3xl font-semibold text-center mb-6 text-[#EAB308]">
+        🛒 Your Cart
+      </h2>
 
       {loading ? (
         <p className="text-center">Loading...</p>
       ) : error ? (
-        <p className="text-center text-red-500">{error}</p>
+        <p className="text-center text-red-400">{error}</p>
       ) : cartItems.length === 0 ? (
-        <p className="text-center text-gray-500">Your cart is empty.</p>
+        <p className="text-center text-gray-400">Your cart is empty.</p>
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             {cartItems.map(item => (
               <div
                 key={item.id}
-                className="bg-white shadow-md p-4 rounded-lg border border-gray-200"
+                className="bg-[#2C2A28] shadow-md p-4 rounded-lg border border-gray-700"
               >
                 <img
                   src={item.art?.image_url}
                   alt={item.art?.title || 'Artwork'}
                   className="h-40 w-full object-cover rounded"
                 />
-                <h3 className="mt-2 font-semibold text-xl">{item.art?.title || 'Untitled'}</h3>
-                <p className="text-green-700 font-bold text-lg">₹{item.art?.price || 'N/A'}</p>
+                <h3 className="mt-2 font-semibold text-xl text-[#F9FAFB]">
+                  {item.art?.title || 'Untitled'}
+                </h3>
+                <p className="text-green-400 font-bold text-lg">
+                  ₹{item.art?.price || 'N/A'}
+                </p>
                 <button
-                  className="mt-3 text-sm bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                  className="mt-3 text-sm bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
                   onClick={() => handleRemove(item.id)}
                 >
                   ❌ Remove from Cart
@@ -114,7 +120,7 @@ function Cart() {
             <div className="text-center">
               <button
                 onClick={handleCheckout}
-                className="px-6 py-3 bg-[#6E1313] text-white font-bold rounded hover:bg-[#440000] transition"
+                className="px-6 py-3 bg-[#EAB308] text-black font-bold rounded hover:bg-yellow-400 transition"
               >
                 ✅ Proceed to Checkout
               </button>

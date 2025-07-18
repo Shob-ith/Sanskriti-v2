@@ -20,6 +20,8 @@ import Contact from './Components/Contact/Contact.jsx';
 import CategoryPage from './Components/CategoryPage/CategoryPage.jsx';
 import Checkout from './Components/Checkout/Checkout.jsx';
 
+import Transaction from './Components/Transaction/Transaction.jsx';
+
 import SellerDashboard from './Components/Seller/SellerDashboard.jsx';
 import EditArt from './Components/Seller/EditArt.jsx';
 import Cart from './Components/Cart/Cart.jsx';
@@ -40,6 +42,7 @@ const router = createBrowserRouter(
         <Route path="/register" element={<Register />} />
         <Route path="/otp" element={<SendOtp />} />
       </Route>
+      
 
       <Route path="/app" element={<AuthLayout />}>
         <Route element={<Layout />}>
@@ -50,6 +53,8 @@ const router = createBrowserRouter(
           <Route path="category/:categoryName" element={<CategoryPage />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="transaction" element={<Transaction />} />
+         
 
           {/* Seller Routes */}
           <Route path="dashboard" element={<SellerDashboard />} />
